@@ -8,6 +8,8 @@
 1. Open the SSDAPI Folder, Right Click on the SSDAPI.sln file and open it with the Visual Studio 
 2. Then Build the Project and Run it. Make sure the port which the backend runs is 5020. 
 3. Backend URl :- http://localhost:5020
+4. Make sure that your Visual Studio is consist these Nuget Packages. ***Google.apis.drive.v3*** 
+         
 
 ## Running the Frontend Web Application (React)
 
