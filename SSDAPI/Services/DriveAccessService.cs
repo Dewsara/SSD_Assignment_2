@@ -12,7 +12,7 @@ using static Google.Apis.Drive.v3.DriveService;
 
 namespace SSDAPI.Services
 {
-    public class DriveService
+    public class DriveAccessService
     {
         public DriveService GetService(string accTkn, string logEmail)
         {
@@ -36,6 +36,17 @@ namespace SSDAPI.Services
                 DataStore = new FileDataStore(applicationName)
 
             });
+
+            var credential = new UserCredential(apiCodeFlow, username, tokenResponse);
+
+
+            var service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = applicationName,
+            });
+
+            return service;
 
         }
     }
