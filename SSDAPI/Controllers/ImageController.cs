@@ -16,7 +16,6 @@ namespace SSDAPI.Controllers
     {
 
         [HttpPost]
-        [Authorize]
         [Route("ImageDataSave")]
         public string SaveUserImage([FromBody] ImageModel imageModel)
         {

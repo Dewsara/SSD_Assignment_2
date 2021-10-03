@@ -29,16 +29,19 @@ namespace SSDAPI.Services
                     DriveService service = dv.GetService(imageModel.Token, imageModel.Email);
 
 
+
+
                     var driveFile = new Google.Apis.Drive.v3.Data.File();
                     driveFile.Name = FileName;
                     driveFile.Description = "Upload By Admin";
                     driveFile.MimeType = "image/png";
                     driveFile.Parents = new string[] { "root" };
 
+                  //  service.Pare.Get(fileId, folderId).Execute();
 
                     var request = service.Files.Create(driveFile, ms, "image/png");
                     request.Fields = "id";
-                    requestID = "12";
+                    requestID = "Success";
                     var response = request.Upload();
                     if (response.Status != Google.Apis.Upload.UploadStatus.Completed)
                         throw response.Exception;
@@ -47,13 +50,13 @@ namespace SSDAPI.Services
             }
             catch (Exception ex)
             {
-                return "lol";
+                return "Error";
             }
         }
 
         public string UploadUserFile(FileModel fileModel)
         {
-            return "";
+                return "Error";
         }
     }
 }
