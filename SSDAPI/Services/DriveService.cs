@@ -24,6 +24,19 @@ namespace SSDAPI.Services
 
             var applicationName = "SSD Assignment 2";// Use the name of the project in Google Cloud
             var username = logEmail;//"it18146516@my.sliit.lk"; // Use your email
+
+            var apiCodeFlow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+            {
+                ClientSecrets = new ClientSecrets
+                {
+                    ClientId = "885024372915-qrhrciub8l3ev12ac6esqs7vfc88l8gr.apps.googleusercontent.com",
+                    ClientSecret = "OCkyLyTBv2Ercqdu5s7kLevu"
+                },
+                Scopes = new[] { Scope.Drive },
+                DataStore = new FileDataStore(applicationName)
+
+            });
+
         }
-        }
+    }
     }
