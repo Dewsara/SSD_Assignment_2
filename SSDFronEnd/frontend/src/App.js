@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import logo from './Images/aboutus.png';
 import { GoogleLogin } from 'react-google-login';
+import { UserDetailsComponent } from "./Components/UserDetailsComponent/UserDetailsComponent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +76,12 @@ function App() {
     }
   };
 
+  function Logout() {
+    setUserDetails(null);
+    sessionStorage.clear();
+    localStorage.clear();
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -85,39 +92,59 @@ function App() {
           <Typography variant="h6" className={classes.title}>
             Creatives
           </Typography>
+          {
+            UserDetails !== null ?
+              <>
+                <Avatar
+                  alt={UserDetails.name}
+                  src={UserDetails.imageUrl}
+                />
+                <Button onClick={() => Logout()} color="inherit">Logout</Button>
+              </> : null
+          }
         </Toolbar>
       </AppBar>
-      <div>
-        <Grid container md={12} xs={12} >
-          <Grid item md={4} xs={12} spacing={2} >
-            <div className={classes.welcomeCard}>
-              <Typography variant="h4">
-                We Are Creatives.....
-              </Typography> <br />
-              <Typography variant="caption">
-                Take up one idea. Make that one idea your life--think of it, dream of it, live on that idea. Let the brain, muscles, nerves, every part of your body, be full of that idea, and just leave every other idea alone. This is the way to success.
-              </Typography> <br />
-              <div>
-                <br />
-                <Box display="flex" justifyContent="flex-end">
-                  <Button variant="outlined" size="large" style={{ marginRight: '0.5rem' }} >Explore</Button>
-                  <GoogleLogin
-                    clientId="885024372915-qrhrciub8l3ev12ac6esqs7vfc88l8gr.apps.googleusercontent.com"
-                    buttonText="Google Login"
-                    scope="https://www.googleapis.com/auth/drive"
-                    onSuccess={googleResponse}
-                    onFailure={googleResponse}
-                    accessType="offline"
-                  />
-                </Box>
-              </div>
-            </div>
-          </Grid>
-          <Grid item md={8} xs={12} spacing={2} >
-            <img src={logo} alt="Logo" width={"60%"} height={"80%"} style={{ marginTop: '4rem', marginRight: '15rem', float: "right" }} />
-          </Grid>
-        </Grid>
-      </div>
+      {
+        UserDetails !== null ?
+          <div className={classes.mainDiv}>
+            <Grid container md={12} xs={12} >
+              <Grid item md={4} xs={12} spacing={2} >
+                <UserDetailsComponent userDetails={UserDetails} />
+              </Grid>
+            </Grid>
+          </div> :
+          <div>
+            <Grid container md={12} xs={12} >
+              <Grid item md={4} xs={12} spacing={2} >
+                <div className={classes.welcomeCard}>
+                  <Typography variant="h4">
+                    We Are Creatives.....
+                  </Typography> <br />
+                  <Typography variant="caption">
+                    Take up one idea. Make that one idea your life--think of it, dream of it, live on that idea. Let the brain, muscles, nerves, every part of your body, be full of that idea, and just leave every other idea alone. This is the way to success.
+                  </Typography> <br />
+                  <div>
+                    <br />
+                    <Box display="flex" justifyContent="flex-end">
+                      <Button variant="outlined" size="large" style={{ marginRight: '0.5rem' }} >Explore</Button>
+                      <GoogleLogin
+                        clientId="885024372915-qrhrciub8l3ev12ac6esqs7vfc88l8gr.apps.googleusercontent.com"
+                        buttonText="Google Login"
+                        scope="https://www.googleapis.com/auth/drive"
+                        onSuccess={googleResponse}
+                        onFailure={googleResponse}
+                        accessType="offline"
+                      />
+                    </Box>
+                  </div>
+                </div>
+              </Grid>
+              <Grid item md={8} xs={12} spacing={2} >
+                <img src={logo} alt="Logo" width={"60%"} height={"80%"} style={{ marginTop: '4rem', marginRight: '15rem', float: "right" }} />
+              </Grid>
+            </Grid>
+          </div>
+      }
     </div>
   );
 }
