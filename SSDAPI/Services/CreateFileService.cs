@@ -16,7 +16,7 @@ namespace SSDAPI.Services
         {
             try
             {
-               
+
                 String FileName = imageModel.UserName + "_" + Guid.NewGuid() + ".png";
 
                 string modifiedstream = Regex.Replace(imageModel.ImageData, @"^data:image\/[a-zA-Z]+;base64,", string.Empty);
@@ -26,7 +26,7 @@ namespace SSDAPI.Services
                 using (Stream ms = new MemoryStream(bytes))
                 {
                     DriveAccessService dv = new DriveAccessService();
-                    DriveService service = dv.GetService(imageModel.Token,imageModel.Email);
+                    DriveService service = dv.GetService(imageModel.Token, imageModel.Email);
 
 
                     var driveFile = new Google.Apis.Drive.v3.Data.File();
@@ -51,5 +51,9 @@ namespace SSDAPI.Services
             }
         }
 
+        public string UploadUserFile(FileModel fileModel)
+        {
+            return "";
+        }
     }
 }
