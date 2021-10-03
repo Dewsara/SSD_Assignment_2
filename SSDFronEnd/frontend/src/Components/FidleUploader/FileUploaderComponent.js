@@ -29,7 +29,9 @@ export function FileUploaderComponent({ test }) {
         var base64;
         fileReader.onload = function (fileLoadedEvent) {
             base64 = fileLoadedEvent.target.result;
-            setPdfFile(base64);
+            var fields = base64.split(",");
+      
+            setPdfFile(fields[1]);
             // Print data in console
             console.log(base64);
         };
@@ -41,11 +43,12 @@ export function FileUploaderComponent({ test }) {
 
     async function requestInitiate(fileBase64) {
         const token = sessionStorage.getItem("accessToken");
-
+       
+      
         var requestModel = {
             userName: sessionStorage.getItem("userName"),
             email: sessionStorage.getItem("email"),
-            fileData: fileBase64,
+            fileData: PdfFile,
             token: token
         }
 
@@ -55,7 +58,7 @@ export function FileUploaderComponent({ test }) {
             body: JSON.stringify(requestModel)
         };
         const response = await fetch(
-            'http://localhost:5020/WeatherForecast/GetStringTest', requestOptions
+            'http://localhost:5020/api/File/FileDataSave', requestOptions
         );
 
         const responseData = await response.json();
@@ -72,7 +75,8 @@ export function FileUploaderComponent({ test }) {
             <Card className={classes.cardShadow}>
                 <CardContent>
                     <div style={{ width: '100%', float: 'left' }}>
-                        <h3>{PdfFile}</h3> <br />
+                        {/* <h3>{PdfFile}</h3> */}
+                         <br />
                     </div>
                     <input
                         type="file"

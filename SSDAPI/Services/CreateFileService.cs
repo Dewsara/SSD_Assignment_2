@@ -1,5 +1,4 @@
-﻿using Assignment2API.Models;
-using Google.Apis.Drive.v3;
+﻿using Google.Apis.Drive.v3;
 using SSDAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace SSDAPI.Services
         {
             try
             {
-               
+
                 String FileName = imageModel.UserName + "_" + Guid.NewGuid() + ".png";
 
                 string modifiedstream = Regex.Replace(imageModel.ImageData, @"^data:image\/[a-zA-Z]+;base64,", string.Empty);
@@ -27,7 +26,9 @@ namespace SSDAPI.Services
                 using (Stream ms = new MemoryStream(bytes))
                 {
                     DriveAccessService dv = new DriveAccessService();
-                    DriveService service = dv.GetService(imageModel.Token,imageModel.Email);
+                    DriveService service = dv.GetService(imageModel.Token, imageModel.Email);
+
+
 
 
                     var driveFile = new Google.Apis.Drive.v3.Data.File();
@@ -36,10 +37,11 @@ namespace SSDAPI.Services
                     driveFile.MimeType = "image/png";
                     driveFile.Parents = new string[] { "root" };
 
+                  //  service.Pare.Get(fileId, folderId).Execute();
 
                     var request = service.Files.Create(driveFile, ms, "image/png");
                     request.Fields = "id";
-                    requestID = "12";
+                    requestID = "Success";
                     var response = request.Upload();
                     if (response.Status != Google.Apis.Upload.UploadStatus.Completed)
                         throw response.Exception;
@@ -48,9 +50,13 @@ namespace SSDAPI.Services
             }
             catch (Exception ex)
             {
-                return "lol";
+                return "Error";
             }
         }
 
+        public string UploadUserFile(FileModel fileModel)
+        {
+                return "Error";
+        }
     }
 }

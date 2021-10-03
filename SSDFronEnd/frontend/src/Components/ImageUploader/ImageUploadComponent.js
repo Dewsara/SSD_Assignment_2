@@ -48,9 +48,9 @@ export function ImageUploadComponent({ test }) {
             body: JSON.stringify(requestModel)
         };
         const response = await fetch(
-            'http://localhost:5020/WeatherForecast/GetStringTest', requestOptions
+            'http://localhost:5020/api/Image/ImageDataSave', requestOptions
         );
-
+            
         const responseData = await response.json();
 
         if (responseData !== null) {
