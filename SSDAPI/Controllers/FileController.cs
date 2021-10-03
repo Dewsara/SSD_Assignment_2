@@ -15,7 +15,6 @@ namespace SSDAPI.Controllers
     public class FileController : ControllerBase
     {
         [HttpPost]
-        [Authorize]
         [Route("FileDataSave")]
         public string SaveUserImage([FromBody] FileModel fileModel)
         {
