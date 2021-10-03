@@ -16,6 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import logo from './Images/aboutus.png';
 import { GoogleLogin } from 'react-google-login';
 import { UserDetailsComponent } from "./Components/UserDetailsComponent/UserDetailsComponent";
+import { ImageUploadComponent } from "./Components/ImageUploader/ImageUploadComponent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,6 +111,13 @@ function App() {
             <Grid container md={12} xs={12} >
               <Grid item md={4} xs={12} spacing={2} >
                 <UserDetailsComponent userDetails={UserDetails} />
+              </Grid>
+              <Grid item md={8} xs={12} >
+                <Grid container md={12} xs={12} >
+                  <Grid item md={12} xs={12} >
+                    <ImageUploadComponent test={12} />
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </div> :
