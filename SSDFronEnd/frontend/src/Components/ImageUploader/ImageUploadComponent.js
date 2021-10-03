@@ -50,10 +50,10 @@ export function ImageUploadComponent({ test }) {
         const response = await fetch(
             'http://localhost:5020/api/Image/ImageDataSave', requestOptions
         );
-            
+
         const responseData = await response.json();
 
-        if (responseData !== null) {
+        if (responseData === "Success") {
             alert("Image Uploaded Successfully")
         } else {
             alert("Error occured in image Upload")

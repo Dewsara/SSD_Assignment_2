@@ -30,21 +30,13 @@ export function FileUploaderComponent({ test }) {
         fileReader.onload = function (fileLoadedEvent) {
             base64 = fileLoadedEvent.target.result;
             var fields = base64.split(",");
-      
             setPdfFile(fields[1]);
-            // Print data in console
-            console.log(base64);
         };
         fileReader.readAsDataURL(fileToLoad);
-
-        await requestInitiate(base64);
-
     }
 
-    async function requestInitiate(fileBase64) {
+    async function UploadFile() {
         const token = sessionStorage.getItem("accessToken");
-       
-      
         var requestModel = {
             userName: sessionStorage.getItem("userName"),
             email: sessionStorage.getItem("email"),
@@ -63,7 +55,7 @@ export function FileUploaderComponent({ test }) {
 
         const responseData = await response.json();
 
-        if (responseData !== null) {
+        if (responseData === "Success") {
             alert("File Uploaded Successfully")
         } else {
             alert("Error occured in image Upload")
@@ -76,7 +68,7 @@ export function FileUploaderComponent({ test }) {
                 <CardContent>
                     <div style={{ width: '100%', float: 'left' }}>
                         {/* <h3>{PdfFile}</h3> */}
-                         <br />
+                        <br />
                     </div>
                     <input
                         type="file"
@@ -86,13 +78,16 @@ export function FileUploaderComponent({ test }) {
                         onChange={(e) => fileUpload(e)}
                     />
                     <label htmlFor="contained-button-file">
-                        <Box display="flex" justifyContent="flex-end">
-                            <Button variant="contained" color="primary" component="span">
-                                Choose
-                            </Button>
-                        </Box>
+                        <Button style={{ margin: "0 auto" }} variant="contained" color="primary" component="span">
+                            Choose
+                        </Button>
                     </label>
                 </CardContent>
+                <Box display="flex" justifyContent="flex-start">
+                    <Button variant="contained" color="primary" component="span" onClick={() => UploadFile()}>
+                        Upload
+                    </Button>
+                </Box>
             </Card>
         </div>
     )
