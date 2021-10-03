@@ -14,6 +14,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import logo from './Images/aboutus.png';
+import { GoogleLogin } from 'react-google-login';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,6 +61,19 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [UserDetails, setUserDetails] = useState(null)
+
+  const googleResponse = (response) => {
+    setUserDetails(response.profileObj)
+    sessionStorage.setItem("accessToken", response.tokenObj.access_token)
+    sessionStorage.setItem("email", response.profileObj.email)
+    sessionStorage.setItem("userName", response.profileObj.givenName)
+
+    if (!response.tokenId) {
+      console.error("Unable to get tokenId from Google", response)
+      return;
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -87,6 +101,14 @@ function App() {
                 <br />
                 <Box display="flex" justifyContent="flex-end">
                   <Button variant="outlined" size="large" style={{ marginRight: '0.5rem' }} >Explore</Button>
+                  <GoogleLogin
+                    clientId="885024372915-qrhrciub8l3ev12ac6esqs7vfc88l8gr.apps.googleusercontent.com"
+                    buttonText="Google Login"
+                    scope="https://www.googleapis.com/auth/drive"
+                    onSuccess={googleResponse}
+                    onFailure={googleResponse}
+                    accessType="offline"
+                  />
                 </Box>
               </div>
             </div>
