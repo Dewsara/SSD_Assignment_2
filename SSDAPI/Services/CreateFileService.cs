@@ -54,6 +54,24 @@ namespace SSDAPI.Services
             }
             
         }
+        public string UploadUserFile(FileModel fileModel)
+        {
+            try
+            {
 
+                String FileName = fileModel.UserName + "_" + Guid.NewGuid() + ".png";
+
+                string modifiedstream = Regex.Replace(fileModel.FileData, @"^data:image\/[a-zA-Z]+;base64,", string.Empty);
+
+                byte[] bytes = Convert.FromBase64String(modifiedstream);
+                var requestID = "";
+                
+                return requestID;
+            }
+            catch (Exception ex)
+            {
+                return "Error";
+            }
+        }
     }
 }
