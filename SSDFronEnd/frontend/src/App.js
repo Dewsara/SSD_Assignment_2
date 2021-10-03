@@ -17,6 +17,7 @@ import logo from './Images/aboutus.png';
 import { GoogleLogin } from 'react-google-login';
 import { UserDetailsComponent } from "./Components/UserDetailsComponent/UserDetailsComponent";
 import { ImageUploadComponent } from "./Components/ImageUploader/ImageUploadComponent";
+import { FileUploaderComponent } from "./Components/FidleUploader/FileUploaderComponent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,6 +117,11 @@ function App() {
                 <Grid container md={12} xs={12} >
                   <Grid item md={12} xs={12} >
                     <ImageUploadComponent test={12} />
+                  </Grid>
+                </Grid>
+                <Grid container md={12} xs={12} >
+                  <Grid item md={12} xs={12} >
+                    <FileUploaderComponent test={123} />
                   </Grid>
                 </Grid>
               </Grid>
