@@ -52,11 +52,8 @@ namespace SSDAPI.Services
             {
                 return "Error";
             }
+            
         }
 
-        public string UploadUserFile(FileModel fileModel)
-        {
-                return "Error";
-        }
     }
 }
